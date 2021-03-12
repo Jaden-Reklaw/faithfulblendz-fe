@@ -20,19 +20,17 @@ import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 import './App.css';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+  state = {
       authenticated: false,
       currentUser: null,
       loading: false
-    }
-
-    this.loadCurrentlyLoggedInUser = this.loadCurrentlyLoggedInUser.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
   }
 
-  loadCurrentlyLoggedInUser() {
+  componentDidMount() {
+    this.loadCurrentlyLoggedInUser();
+  }
+
+  loadCurrentlyLoggedInUser = () => {
     this.setState({
       loading: true
     });
@@ -51,7 +49,7 @@ class App extends Component {
     });    
   }
 
-  handleLogout() {
+  handleLogout = () => {
     sessionStorage.removeItem(ACCESS_TOKEN);
     this.setState({
       authenticated: false,
@@ -60,9 +58,7 @@ class App extends Component {
     Alert.success("You're safely logged out!");
   }
 
-  componentDidMount() {
-    this.loadCurrentlyLoggedInUser();
-  }
+  
 
   render() {
     if(this.state.loading) {

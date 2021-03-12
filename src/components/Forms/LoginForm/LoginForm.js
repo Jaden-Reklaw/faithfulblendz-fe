@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 //Components to Import
 import { login } from '../../../util/APIUtils';
-import { ACCESS_TOKEN } from '../../../constants/index';
+import { ACCESS_TOKEN } from '../../../constants/Constants';
 import Alert from 'react-s-alert';
 
 class LoginForm extends Component {

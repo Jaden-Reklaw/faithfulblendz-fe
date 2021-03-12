@@ -4,8 +4,8 @@ import { Link, Redirect } from 'react-router-dom';
 
 //Components to Import
 import Alert from 'react-s-alert';
-import LoginForm from '../../components/Forms/LoginForm/LoginForm';
-import SocialLoginForm from '../../components/Forms/SocialLoginForm/SocialLoginForm';
+import LoginForm from '../../Forms/LoginForm/LoginForm';
+import SocialLoginForm from '../../Forms/SocialLoginForm/SocialLoginForm';
 
 class Login extends Component {
     state = {

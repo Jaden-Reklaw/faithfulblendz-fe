@@ -4,20 +4,24 @@ import {
   Switch
 } from 'react-router-dom';
 import AppHeader from '../common/AppHeader';
-import Home from '../home/Home';
-import Login from '../user/login/Login';
-import Signup from '../user/signup/Signup';
-import Profile from '../user/profile/Profile';
-import OAuth2RedirectHandler from '../user/oauth2/OAuth2RedirectHandler';
-import NotFound from '../common/NotFound';
-import LoadingIndicator from '../common/LoadingIndicator';
+
+import OAuth2RedirectHandler from '../components/Oauth2/OAuth2RedirectHandler';
+import NotFound from '../components/Pages/NotFound/NotFound';
+import LoadingIndicator from '../components/LoadingIndicator/LoadingIndicator';
 import { getCurrentUser } from '../util/APIUtils';
-import { ACCESS_TOKEN } from '../constants';
-import PrivateRoute from '../common/PrivateRoute';
+import { ACCESS_TOKEN } from '../constants/Constants';
+import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
 import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 import './App.css';
+
+//Import Pages
+import Home from '../components/Pages/Home/Home';
+import Login from '../components/Pages/Login/Login';
+import Signup from '../components/Pages/Signup/Signup';
+import Profile from '../components/Pages/Profile/Profile';
+import TopNavBar from '../components/Navigations/TopNavBar/TopNavBar';
 
 class App extends Component {
   state = {
@@ -68,7 +72,7 @@ class App extends Component {
     return (
       <div className="app">
         <div className="app-top-box">
-          <AppHeader authenticated={this.state.authenticated} onLogout={this.handleLogout} />
+          <TopNavBar authenticated={this.state.authenticated} onLogout={this.handleLogout}/>
         </div>
         <div className="app-body">
           <Switch>

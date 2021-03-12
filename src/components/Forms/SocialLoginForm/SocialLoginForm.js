@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 //Components to Import
-import { GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL, GITHUB_AUTH_URL } from '../../../constants/index';
+import { GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL, GITHUB_AUTH_URL } from '../../../constants/Constants';
 import fbLogo from '../../../img/fb-logo.png';
 import googleLogo from '../../../img/google-logo.png';
 import githubLogo from '../../../img/github-logo.png';

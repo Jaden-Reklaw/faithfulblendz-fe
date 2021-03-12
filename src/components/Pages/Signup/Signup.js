@@ -3,8 +3,8 @@ import './Signup.css';
 import { Link, Redirect } from 'react-router-dom'
 
 //Components to Import
-import SignupForm from '../../components/Forms/SignupForm/SignupForm';
-import SocialLoginForm from '../../components/Forms/SocialLoginForm/SocialLoginForm';
+import SignupForm from '../../Forms/SignupForm/SignupForm';
+import SocialLoginForm from '../../Forms/SocialLoginForm/SocialLoginForm';
 
 class Signup extends Component {
     state = {

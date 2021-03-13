@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import {
-  Route,
-  Switch
-} from 'react-router-dom';
-import AppHeader from '../common/AppHeader';
+import {Route, Switch} from 'react-router-dom';
+
 
 import OAuth2RedirectHandler from '../components/Oauth2/OAuth2RedirectHandler';
 import NotFound from '../components/Pages/NotFound/NotFound';

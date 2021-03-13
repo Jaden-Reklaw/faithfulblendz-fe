@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import logo from '../../../img/faithfulblendzlogo.png';
 //Bootstrap Components
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -12,7 +13,16 @@ class TopNavBar extends Component {
         return ( 
             <header>
                 <Navbar bg="light" expand="lg">
-                    <Navbar.Brand href="/">Faithful Blendz.</Navbar.Brand>
+                <Navbar.Brand href="/">
+                <img
+                    alt=""
+                    src={logo}
+                    width="30"
+                    height="30"
+                    className="d-inline-block align-top"
+                />{' '}
+                Faithful Blendz.
+                </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                     {this.props.authenticated ? 
@@ -27,8 +37,8 @@ class TopNavBar extends Component {
                         </Nav>
                     }
                         <Form inline>
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <Button variant="outline-success">Search</Button>
+                            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                            <Button variant="outline-success">Search</Button>
                         </Form>
                     </Navbar.Collapse>
                 </Navbar>

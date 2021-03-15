@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Route, Switch} from 'react-router-dom';
 
+//Connect to the redux store
+import { connect } from 'react-redux';
 
 import OAuth2RedirectHandler from '../components/Oauth2/OAuth2RedirectHandler';
 import NotFound from '../components/Pages/NotFound/NotFound';
@@ -32,22 +34,45 @@ class App extends Component {
   }
 
   loadCurrentlyLoggedInUser = () => {
+    
+    console.log('loadCurrentlyLoggedInUser');
     this.setState({
-      loading: true
+      loading: false
+    });
+    
+    if(!sessionStorage.getItem(ACCESS_TOKEN)) {
+      //console.log('!sessionStorage.getItem(ACCESS_TOKEN)', !sessionStorage.getItem(ACCESS_TOKEN));
+      return Promise.reject("No access token set.");
+    }
+    const headers = new Headers({
+      'Content-Type': 'application/json',
     });
 
-    getCurrentUser()
-    .then(response => {
-      this.setState({
-        currentUser: response,
-        authenticated: true,
-        loading: false
-      });
-    }).catch(error => {
-      this.setState({
-        loading: false
-      });  
-    });    
+    if(sessionStorage.getItem(ACCESS_TOKEN)) {
+      headers.append('Authorization', 'Bearer ' + sessionStorage.getItem(ACCESS_TOKEN))
+    }
+
+    const options = {headers: headers, url: 'http://localhost:8080/user/me', method: 'GET'};
+    fetch(options.url, options)
+    .then(response => 
+      response.json().then(json => {
+          if(!response.ok) {
+              return Promise.reject(json);
+          }
+          return json;
+      }).then(response => {
+        console.log("json response",response);
+        this.setState({
+          currentUser: response,
+          authenticated: true,
+          loading: false
+        });
+      }).catch(error => {
+        this.setState({
+          loading: false
+        }); 
+      })
+    );    
   }
 
   handleLogout = () => {
@@ -92,4 +117,9 @@ class App extends Component {
   }
 }
 
-export default App;
+//Get redux store
+const mapStateToProps = reduxState => ({
+  
+});
+
+export default connect(mapStateToProps)(App);

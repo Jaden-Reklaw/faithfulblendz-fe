@@ -10,7 +10,9 @@ const request = (options) => {
     }
 
     const defaults = {headers: headers};
+    console.log('default', defaults);
     options = Object.assign({}, defaults, options);
+    console.log('options', options);
 
     return fetch(options.url, options)
     .then(response => 
@@ -22,17 +24,6 @@ const request = (options) => {
         })
     );
 };
-
-export function getCurrentUser() {
-    if(!sessionStorage.getItem(ACCESS_TOKEN)) {
-        return Promise.reject("No access token set.");
-    }
-
-    return request({
-        url: API_BASE_URL + "/user/me",
-        method: 'GET'
-    });
-}
 
 export function login(loginRequest) {
     return request({

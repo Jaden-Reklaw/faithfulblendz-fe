@@ -1,4 +1,3 @@
-import { Button } from 'react-bootstrap';
 import React, { Component } from 'react';
 import './Profile.css';
 
@@ -27,7 +26,6 @@ class Profile extends Component {
                         <div className="profile-name">
                            <h2>{this.props.currentUser.name}</h2>
                            <p className="profile-email">{this.props.currentUser.email}</p>
-                           <Button onClick={this.loadUser}>Request User Details</Button>
                         </div>
                     </div>
                 </div>    

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 //Components to Import
-import { signup } from '../../../util/APIUtils';
+import { ACCESS_TOKEN } from '../../../constants/Constants';
 import Alert from 'react-s-alert';
 
 class SignupForm extends Component {
@@ -28,11 +28,31 @@ class SignupForm extends Component {
         event.preventDefault();   
 
         const signUpRequest = Object.assign({}, this.state);
+        
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+        });
 
-        signup(signUpRequest)
-        .then(response => {
+        if(sessionStorage.getItem(ACCESS_TOKEN)) {
+            headers.append('Authorization', 'Bearer ' + sessionStorage.getItem(ACCESS_TOKEN))
+        }
+
+        const options = {
+            headers: headers,
+            url: "http://localhost:8080/auth/signup",
+            method: "POST",
+            body: JSON.stringify(signUpRequest)
+        }
+
+        fetch(options.url, options).then(response => 
+        response.json().then(json => {
+            if(!response.ok) {
+                return Promise.reject(json);
+            }
+            return json;
+        })).then(response => {
             Alert.success("You're successfully registered. Please login to continue!");
-            this.props.history.push("/login");
+            this.props.history.push("/profile");
         }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');            
         });

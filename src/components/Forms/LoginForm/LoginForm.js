@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 //Components to Import
-import { login } from '../../../util/APIUtils';
 import { ACCESS_TOKEN } from '../../../constants/Constants';
 import Alert from 'react-s-alert';
 
@@ -25,16 +24,39 @@ class LoginForm extends Component {
     }
 
     handleSubmit = (event) => {
-        event.preventDefault();   
+        event.preventDefault();
+        
+        const headers = new Headers({
+            'Content-Type': 'application/json',
+        });
+
+        if(sessionStorage.getItem(ACCESS_TOKEN)) {
+            headers.append('Authorization', 'Bearer ' + sessionStorage.getItem(ACCESS_TOKEN))
+        }
 
         const loginRequest = Object.assign({}, this.state);
+        console.log('loginRequest', loginRequest);
 
-        login(loginRequest)
-        .then(response => {
+        const options = {
+            headers: headers,
+            url:"http://localhost:8080/auth/login",
+            method: "POST",
+            body: JSON.stringify(loginRequest)
+        };
+
+        fetch(options.url, options)
+        .then(response => 
+        response.json()
+        .then(json => {
+            if(!response.ok) {
+              return Promise.reject(json);
+            }
+            return json;
+        })).then(response => {
             sessionStorage.setItem(ACCESS_TOKEN, response.accessToken);
             Alert.success("You're successfully logged in!");
             this.props.history.push("/");
-            window.location.reload(false);
+            //window.location.reload(false);
         }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
         });

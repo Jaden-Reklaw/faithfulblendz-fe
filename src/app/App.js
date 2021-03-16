@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import OAuth2RedirectHandler from '../components/Oauth2/OAuth2RedirectHandler';
 import NotFound from '../components/Pages/NotFound/NotFound';
 import LoadingIndicator from '../components/LoadingIndicator/LoadingIndicator';
-import { getCurrentUser } from '../util/APIUtils';
 import { ACCESS_TOKEN } from '../constants/Constants';
 import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
 import Alert from 'react-s-alert';
@@ -55,12 +54,13 @@ class App extends Component {
     const options = {headers: headers, url: 'http://localhost:8080/user/me', method: 'GET'};
     fetch(options.url, options)
     .then(response => 
-      response.json().then(json => {
+      response.json()
+      .then(json => {
           if(!response.ok) {
               return Promise.reject(json);
           }
           return json;
-      }).then(response => {
+      })).then(response => {
         console.log("json response",response);
         this.setState({
           currentUser: response,
@@ -71,8 +71,7 @@ class App extends Component {
         this.setState({
           loading: false
         }); 
-      })
-    );    
+      });   
   }
 
   handleLogout = () => {

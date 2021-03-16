@@ -43,6 +43,9 @@ class App extends Component {
       //console.log('!sessionStorage.getItem(ACCESS_TOKEN)', !sessionStorage.getItem(ACCESS_TOKEN));
       return Promise.reject("No access token set.");
     }
+
+    this.props.dispatch({type: 'FETCH_USER'});
+    
     const headers = new Headers({
       'Content-Type': 'application/json',
     });

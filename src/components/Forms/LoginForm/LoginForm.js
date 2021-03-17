@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 
-//Components to Import
-import { ACCESS_TOKEN } from '../../../constants/Constants';
-import Alert from 'react-s-alert';
-
 //Connect to the redux store
 import { connect } from 'react-redux';
 

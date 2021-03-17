@@ -4,6 +4,9 @@ import React, { Component } from 'react';
 import { ACCESS_TOKEN } from '../../../constants/Constants';
 import Alert from 'react-s-alert';
 
+//Connect to the redux store
+import { connect } from 'react-redux';
+
 class LoginForm extends Component {
     constructor(props) {
         super(props);
@@ -25,41 +28,7 @@ class LoginForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        
-        const headers = new Headers({
-            'Content-Type': 'application/json',
-        });
-
-        if(sessionStorage.getItem(ACCESS_TOKEN)) {
-            headers.append('Authorization', 'Bearer ' + sessionStorage.getItem(ACCESS_TOKEN))
-        }
-
-        const loginRequest = Object.assign({}, this.state);
-        console.log('loginRequest', loginRequest);
-
-        const options = {
-            headers: headers,
-            url:"http://localhost:8080/auth/login",
-            method: "POST",
-            body: JSON.stringify(loginRequest)
-        };
-
-        fetch(options.url, options)
-        .then(response => 
-        response.json()
-        .then(json => {
-            if(!response.ok) {
-              return Promise.reject(json);
-            }
-            return json;
-        })).then(response => {
-            sessionStorage.setItem(ACCESS_TOKEN, response.accessToken);
-            Alert.success("You're successfully logged in!");
-            this.props.history.push("/");
-            //window.location.reload(false);
-        }).catch(error => {
-            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
-        });
+        this.props.dispatch({type: 'POST_LOGIN', payload: this.state});
     }
     
     render() {
@@ -83,4 +52,4 @@ class LoginForm extends Component {
     }
 }
 
-export default LoginForm;
+export default connect()(LoginForm);

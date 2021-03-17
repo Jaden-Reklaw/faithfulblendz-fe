@@ -33,14 +33,11 @@ class App extends Component {
   }
 
   loadCurrentlyLoggedInUser = () => {
-    
-    console.log('loadCurrentlyLoggedInUser');
     this.setState({
       loading: false
     });
     
     if(!sessionStorage.getItem(ACCESS_TOKEN)) {
-      //console.log('!sessionStorage.getItem(ACCESS_TOKEN)', !sessionStorage.getItem(ACCESS_TOKEN));
       return Promise.reject("No access token set.");
     }
 
@@ -54,7 +51,7 @@ class App extends Component {
       headers.append('Authorization', 'Bearer ' + sessionStorage.getItem(ACCESS_TOKEN))
     }
 
-    const options = {headers: headers, url: 'http://localhost:8080/user/me', method: 'GET'};
+    const options = {headers: headers, url: 'http://localhost:8080/api/v1/user', method: 'GET'};
     fetch(options.url, options)
     .then(response => 
       response.json()

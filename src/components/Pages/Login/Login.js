@@ -33,7 +33,7 @@ class Login extends Component {
             console.log('authenticated is true', this.props.authenticated);
             return <Redirect
                 to={{
-                pathname: "/",
+                pathname: "/profile",
                 state: { from: this.props.location }
             }}/>;            
         }

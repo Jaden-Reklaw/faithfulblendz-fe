@@ -43,7 +43,7 @@ class App extends Component {
       
     }
   }
-  
+
   loadCurrentlyLoggedInUser = () => {
     this.setState({
       loading: true

@@ -27,6 +27,7 @@ function* postLoginSaga ( action ){
             response = yield response.json();
             sessionStorage.setItem(ACCESS_TOKEN, response.accessToken);
             Alert.success("You're successfully logged in!");
+            window.location = "http://localhost:3000/profile";
         }
     } catch(error) {
         console.log('error with movie post request', error);

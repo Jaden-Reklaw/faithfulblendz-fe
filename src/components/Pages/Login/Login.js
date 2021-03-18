@@ -30,9 +30,10 @@ class Login extends Component {
     
     render() {
         if(this.props.authenticated) {
+            console.log('authenticated is true', this.props.authenticated);
             return <Redirect
                 to={{
-                pathname: "/profile",
+                pathname: "/",
                 state: { from: this.props.location }
             }}/>;            
         }

@@ -1,5 +1,4 @@
 import { put, takeLatest } from 'redux-saga/effects';
-import axios from 'axios';
 import { API_BASE_URL, ACCESS_TOKEN } from '../../constants/Constants';
 
 //Create Generator Funcitons for sagas
@@ -14,17 +13,11 @@ function* fetchUserSaga ( action ){
         headers.append('Authorization', 'Bearer ' + sessionStorage.getItem(ACCESS_TOKEN))
       }
   
-      const options = {headers: headers, url: 'http://localhost:8080/api/v1/user', method: 'GET'};
+      const options = {headers: headers, url: `${API_BASE_URL}/api/v1/user`, method: 'GET'};
       
-    const response = yield fetch(options.url, options).then(response => 
-      response.json().then(json => {
-          if(!response.ok) {
-              return Promise.reject(json);
-          }
-          return json;
-      })).then(response => {
-        return response;
-      })
+      let response = yield fetch(options.url, options);
+      response = yield response.json();
+
       //Once that is back successfully, dispatch action to the reducer
       yield put({ type: 'SET_USER', payload: response});
     } catch(error) {

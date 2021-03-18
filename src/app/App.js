@@ -32,46 +32,31 @@ class App extends Component {
     this.loadCurrentlyLoggedInUser();
   }
 
+  componentDidUpdate(prevProps) {
+    if(JSON.stringify(this.props.user) !== JSON.stringify(prevProps.user)) {
+      console.log('props during component update', this.props.user.status);
+      if(this.props.user.status === 401) {
+        this.setState({authenticated: false, loading: false});
+      } else {
+        this.setState({currentUser: this.props.user, authenticated: true, loading: false});
+      }
+      
+    }
+  }
+  
   loadCurrentlyLoggedInUser = () => {
     this.setState({
-      loading: false
+      loading: true
     });
     
     if(!sessionStorage.getItem(ACCESS_TOKEN)) {
+      this.setState({
+        loading: false
+      });
       return Promise.reject("No access token set.");
     }
 
-    this.props.dispatch({type: 'FETCH_USER'});
-    
-    const headers = new Headers({
-      'Content-Type': 'application/json',
-    });
-
-    if(sessionStorage.getItem(ACCESS_TOKEN)) {
-      headers.append('Authorization', 'Bearer ' + sessionStorage.getItem(ACCESS_TOKEN))
-    }
-
-    const options = {headers: headers, url: 'http://localhost:8080/api/v1/user', method: 'GET'};
-    fetch(options.url, options)
-    .then(response => 
-      response.json()
-      .then(json => {
-          if(!response.ok) {
-              return Promise.reject(json);
-          }
-          return json;
-      })).then(response => {
-        console.log("json response",response);
-        this.setState({
-          currentUser: response,
-          authenticated: true,
-          loading: false
-        });
-      }).catch(error => {
-        this.setState({
-          loading: false
-        }); 
-      });   
+    this.props.dispatch({type: 'FETCH_USER'});  
   }
 
   handleLogout = () => {
@@ -82,8 +67,6 @@ class App extends Component {
     });
     Alert.success("You're safely logged out!");
   }
-
-  
 
   render() {
     if(this.state.loading) {
@@ -117,8 +100,8 @@ class App extends Component {
 }
 
 //Get redux store
-const mapStateToProps = reduxState => ({
-  
+const mapStateToProps = state => ({
+  user: state.rootReducer.user,
 });
 
 export default connect(mapStateToProps)(App);

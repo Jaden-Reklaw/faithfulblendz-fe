@@ -5,10 +5,11 @@ import BuddhistTemple from '../../img/BuddhistTemple.jpg';
 
 //Bootstrap Components
 import Carousel from 'react-bootstrap/Carousel';
+import Container from 'react-bootstrap/Container';
 
 function MainCarousel() {
     return(
-        <div className="container-fluid p-0">
+        <Container fluid className="p-0">
             <Carousel>
                 <Carousel.Item interval={5000}>
                     <img
@@ -44,7 +45,7 @@ function MainCarousel() {
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
-        </div>
+        </Container>
     );
 }
 

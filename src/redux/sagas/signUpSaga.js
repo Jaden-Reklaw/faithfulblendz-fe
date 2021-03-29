@@ -5,7 +5,6 @@ import axios from 'axios';
 //Saga for adding a user to the database
 function* postUserSaga ( action ){
     try {
-        console.log('postUserSaga', action.payload);
         const loginInfo = {email: action.payload.email, password: action.payload.password};
         const config = {
             headers: { 'Content-Type': 'application/json' },

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 
 //Components to Import
-import { ACCESS_TOKEN } from '../../../constants/Constants';
-import Alert from 'react-s-alert';
 
 //Connect to the redux store
 import { connect } from 'react-redux';
+
+//Import Bootstrap Components
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 class SignupForm extends Component {
     constructor(props) {
@@ -29,65 +31,50 @@ class SignupForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();   
-
-        const signUpRequest = Object.assign({}, this.state);
-        
-        const headers = new Headers({
-            'Content-Type': 'application/json',
-        });
-
-        if(sessionStorage.getItem(ACCESS_TOKEN)) {
-            headers.append('Authorization', 'Bearer ' + sessionStorage.getItem(ACCESS_TOKEN))
-        }
-
-        const options = {
-            headers: headers,
-            url: "http://localhost:8080/api/v1/auth/signup",
-            method: "POST",
-            body: JSON.stringify(signUpRequest)
-        }
-
         this.props.dispatch({type: 'POST_USER', payload: this.state});
-        Alert.success("You're successfully registered. Please login to continue!");
         this.props.history.push("/profile");
-
-        // fetch(options.url, options).then(response => 
-        // response.json().then(json => {
-        //     if(!response.ok) {
-        //         return Promise.reject(json);
-        //     }
-        //     return json;
-        // })).then(response => {
-        //     Alert.success("You're successfully registered. Please login to continue!");
-        //     this.props.history.push("/profile");
-        // }).catch(error => {
-        //     Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');            
-        // });
     }
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <div className="form-item">
-                    <input type="text" name="name" 
-                        className="form-control" placeholder="Name"
-                        value={this.state.name} onChange={this.handleInputChange} required/>
-                </div>
-                <div className="form-item">
-                    <input type="email" name="email" 
-                        className="form-control" placeholder="Email"
-                        value={this.state.email} onChange={this.handleInputChange} required/>
-                </div>
-                <div className="form-item">
-                    <input type="password" name="password" 
-                        className="form-control" placeholder="Password"
-                        value={this.state.password} onChange={this.handleInputChange} required/>
-                </div>
-                <div className="form-item">
-                    <button type="submit" className="btn btn-block btn-primary" >Sign Up</button>
-                </div>
-            </form>                    
-
+            <Form onSubmit={this.handleSubmit}>
+                <Form.Group controlId="formBasicName">
+                    <Form.Label srOnly>Name</Form.Label>
+                    <Form.Control 
+                        type="text"
+                        name="name" 
+                        placeholder="Enter Name"
+                        value={this.state.name}
+                        onChange={this.handleInputChange}
+                        required 
+                    />
+                </Form.Group>
+                <Form.Group controlId="formBasicEmail">
+                    <Form.Label srOnly>Email</Form.Label>
+                    <Form.Control 
+                        type="email"
+                        name="email" 
+                        placeholder="Enter Email"
+                        value={this.state.email}
+                        onChange={this.handleInputChange}
+                        required 
+                    />
+                </Form.Group>
+                <Form.Group controlId="formBasicPassword">
+                    <Form.Label srOnly>Password</Form.Label>
+                    <Form.Control 
+                        type="password"
+                        name="password" 
+                        placeholder="Enter Password"
+                        value={this.state.password}
+                        onChange={this.handleInputChange}
+                        required 
+                    />
+                </Form.Group>
+                <Button type="submit" className="btn btn-block btn-primary">
+                    Sign Up
+                </Button>
+            </Form>                    
         );
     }
 }

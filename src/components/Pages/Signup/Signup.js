@@ -28,7 +28,7 @@ class Signup extends Component {
                     <h1 className="login-title">Signup with SpringSocial</h1>
                     <SocialLoginForm displayText={this.state.isLoginOrSignup}/>
                     <div className="or-separator">
-                        <span className="or-text">OR</span>
+                        <p className="subtitle fancy"><span>OR</span></p>
                     </div>
                     <SignupForm {...this.props} />
                     <span className="login-link">Already have an account? <Link to="/login">Login!</Link></span>

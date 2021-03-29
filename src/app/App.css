@@ -1,6 +1,13 @@
 /* Import for Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 
+body {
+  margin: 0;
+  font-family: 'Lora', serif !important;
+}
+
+/* Alerts */
 .s-alert-box {
     min-width: 250px;
 }
@@ -9,6 +16,7 @@
     width: 2px;
 }
 
+/* main navigation */
 .navbar-brand {
     padding: 20px;
     font-family: 'Rock Salt', cursive;
@@ -23,12 +31,45 @@
     background: #fff;
     box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
     border-radius: 2px;
-    width: 500px;
+    width: 450px;
     display: inline-block;
     margin-top: 30px;
     vertical-align: middle;
     position: relative;    
     padding: 35px;
+}
+
+/* Line Text Line Styling */
+.or-separator {
+    padding: 12px;
+}
+.fancy {
+    line-height: 0.5;
+    text-align: center;
+}
+
+.fancy span {
+    display: inline-block;
+    position: relative;
+    padding: 0 12px;  
+}
+
+.fancy span:before,
+.fancy span:after {
+    content: "";
+    position: absolute;
+    height: 5px;
+    border-bottom: 2px solid black;
+    top: 0;
+    width: 170px;
+}
+
+.fancy span:before {
+    right: 90%;
+}
+
+.fancy span:after {
+    left: 90%;
 }
 
 .social-btn {

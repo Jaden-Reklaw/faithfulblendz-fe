@@ -20,6 +20,7 @@ import Login from '../components/Pages/Login/Login';
 import Signup from '../components/Pages/Signup/Signup';
 import Profile from '../components/Pages/Profile/Profile';
 import TopNavBar from '../components/Navigations/TopNavBar/TopNavBar';
+import Footer from '../components/Footer/Footer.component';
 
 class App extends Component {
   state = {
@@ -75,9 +76,7 @@ class App extends Component {
 
     return (
       <div className="app">
-        <div className="app-top-box">
-          <TopNavBar authenticated={this.state.authenticated} onLogout={this.handleLogout}/>
-        </div>
+        <TopNavBar authenticated={this.state.authenticated} onLogout={this.handleLogout}/>
         <div className="app-body">
           <Switch>
             <Route exact path="/" component={Home}></Route>           
@@ -91,6 +90,7 @@ class App extends Component {
             <Route component={NotFound}></Route>
           </Switch>
         </div>
+        <Footer />
         <Alert stack={{limit: 3}} 
           timeout = {3000}
           position='top-right' effect='slide' offset={65} />

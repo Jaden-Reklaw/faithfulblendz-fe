@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import './Login.css';
 import { Link, Redirect } from 'react-router-dom';
 
 //Components to Import
 import Alert from 'react-s-alert';
 import LoginForm from '../../Forms/LoginForm/LoginForm';
 import SocialLoginForm from '../../Forms/SocialLoginForm/SocialLoginForm';
+
+//Bootstrap Components
+import Container from 'react-bootstrap/Container';
 
 class Login extends Component {
     state = {
@@ -39,17 +41,17 @@ class Login extends Component {
         }
 
         return (
-            <div className="login-container">
+            <Container>
                 <div className="login-content">
                     <h1 className="login-title">Login to SpringSocial</h1>
                     <SocialLoginForm displayText={this.state.isLoginOrSignup}/>
                     <div className="or-separator">
-                        <span className="or-text">OR</span>
+                    <p className="subtitle fancy"><span>OR</span></p>
                     </div>
                     <LoginForm {...this.props} />
-                    <span className="signup-link">New user? <Link to="/signup">Sign up!</Link></span>
+                    <span className="login-link">New user? <Link to="/signup">Sign up!</Link></span>
                 </div>
-            </div>
+            </Container>
         );
     }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../img/faithfulblendzlogo.png';
+import logo from '../../img/faithfulblendzlogo2.png';
 import './Logo.css';
 
 function Logo() {
@@ -8,8 +8,8 @@ function Logo() {
         <img    className="logo spin"
                 src={logo}
                 alt="faithful blendz logo"
-                width="40"
-                height="40"
+                width="50"
+                height="50"
                 
                 
                 />

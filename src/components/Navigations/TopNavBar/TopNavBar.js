@@ -12,7 +12,7 @@ class TopNavBar extends Component {
     render() { 
         return ( 
             <header>
-                <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
                     <Navbar.Brand href="/" className="text-light mr-auto">
                     <img
                         alt=""

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import logo from '../../../img/faithfulblendzlogo.png';
+
 //Bootstrap Components
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -15,7 +15,7 @@ class TopNavBar extends Component {
             <header>
                 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                     <Navbar.Brand href="/" className="text-light mr-auto">
-                    <Logo />{' '}
+                    <Logo width={70} height={70} />{' '}
                     Faithful Blendz .
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
